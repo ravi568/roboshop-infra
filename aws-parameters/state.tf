@@ -1,14 +1,11 @@
 terraform {
-  backend "s3" {
-    bucket = "terraform-bt71"
-    key    = "05-s3-state/terraform.tfstate"
-    region = "us-east-1"
-  }
+  backend "s3" {}
 }
-resource "aws_ssm_parameter" "foo" {
-  name  = "foo"
-  type  = "String"
-  value = "bar"
+resource "aws_ssm_parameter" "parameter" {
+  count = length(var.parameters)
+  name  = var.parameters[count.index].name
+  type  = var.parameters[count.index].type
+  value = var.parameters[count.index].value
 }
 
-variable "paramaters" {}
+variable "parameters" {}
