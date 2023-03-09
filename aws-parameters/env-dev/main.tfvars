@@ -20,3 +20,13 @@ parameters = [
   { name = "dev.cart.catalogue_host", value = "catalogue-dev.kalluriravidevops71.online", type = "String" },
   { name = "dev.cart.catalogue_port", value = "8080", type = "String" }
 ]
+
+secrets =[
+
+  { name = "dev.mysql.password", value = "RoboShop@1", type = "SecureString" },
+  { name = "dev.payment.amqp_user", value = "roboshop", type = "SecureString" },
+  { name = "dev.payment.amqp_pass", value = "roboshop123", type = "SecureString" },
+  { name = "dev.rabbitmq.amqp_user", value = "roboshop", type = "SecureString" },
+  { name = "dev.rabbitmq.amqp_pass", value = "roboshop123", type = "SecureString" }
+
+]
