@@ -1,6 +1,4 @@
 
-
-
 resource "aws_instance" "ec2" {
   ami                    = data.aws_ami.ami.image_id
   instance_type          = var.instance_type
@@ -78,7 +76,7 @@ resource "aws_iam_policy" "ssm-policy" {
           "ssm:GetParameters",
           "ssm:GetParameter"
         ],
-        "Resource" : "arn:aws:ssm:us-east-1:271551280472:parameter/${var.env}.${var.component}"
+        "Resource" : "arn:aws:ssm:us-east-1:271551280472:parameter/${var.env}.${var.component}*"
       },
       {
         "Sid" : "VisualEditor1",
