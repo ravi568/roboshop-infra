@@ -18,6 +18,7 @@ module "docdb" {
   source = "git::https://github.com/ravi568/tf-module-docdb.git"
   env = var.env
   tags = var.tags
+
   # subnet id is cmoing from vpc module private subnets to here as input
   subnet_ids= local.db_subnet_ids
 
