@@ -33,7 +33,52 @@ module "docdb" {
 
 }
 
+module "rds"{
+  source = "git::https://github.com/ravi568/tf-module-rds.git"
+  env = var.env
+  tags = var.tags
 
+  # subnet id is cmoing from vpc module private subnets to here as input
+  subnet_ids= local.db_subnet_ids
+
+  for_each = var.rds
+  engine= each.value["engine"]
+  engine_version= each.value["engine_version"]
+  backup_retention_period= each.value["backup_retention_period"]
+  preferred_backup_window= each.value["preferred_backup_window"]
+  no_of_instances= each.value["no_of_instances"]
+  instance_class= each.value["instance_class"]
+}
+
+
+module "elasticache"{
+  source = "git::https://github.com/ravi568/tf-module-elasticache.git"
+  env = var.env
+  tags = var.tags
+
+  # subnet id is cmoing from vpc module private subnets to here as input
+  subnet_ids= local.db_subnet_ids
+
+  for_each = var.elasticache
+  engine= each.value["engine"]
+  engine_version= each.value["engine_version"]
+  num_cache_nodes= each.value["num_cache_nodes"]
+  node_type= each.value["node_type"]
+
+}
+
+module "rabbitmq"{
+  source = "git::https://github.com/ravi568/tf-module-rabbitmq.git"
+  env = var.env
+  tags = var.tags
+
+  # subnet id is cmoing from vpc module private subnets to here as input
+  subnet_ids= local.db_subnet_ids
+
+  for_each = var.rabbitmq
+  instance_type= each.value["instance_type"]
+
+}
 #output "vpc" {
 #  value = module.vpc
 #}
