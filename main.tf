@@ -96,6 +96,9 @@ module "alb"{
 }
 
 module "app"{
+
+  depends_on = [module.docdb, module.rds, module.elasticache, module.alb, module.rabbitmq]
+
   source = "git::https://github.com/ravi568/tf-module-app.git"
   env = var.env
   tags = var.tags
