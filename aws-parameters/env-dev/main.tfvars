@@ -18,7 +18,7 @@ parameters = [
   { name = "dev.catalogue.mongo_url", value = "mongodb://mongodb-dev.kalluriravidevops71.online:27017/users", type = "String" },
   { name = "dev.cart.redis_host", value = "redis-dev.kalluriravidevops71.online", type = "String" },
   { name = "dev.cart.catalogue_host", value = "catalogue-dev.kalluriravidevops71.online", type = "String" },
-  { name = "dev.cart.catalogue_port", value = "8080", type = "String" }
+  { name = "dev.cart.catalogue_port", value = "80", type = "String" }
 ]
 
 secrets =[
