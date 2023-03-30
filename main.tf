@@ -59,12 +59,14 @@ module "elasticache"{
 
   # subnet id is cmoing from vpc module private subnets to here as input
   subnet_ids= local.db_subnet_ids
+  vpc_id= module.vpc["main"].vpc_id
 
   for_each = var.elasticache
   engine= each.value["engine"]
   engine_version= each.value["engine_version"]
   num_cache_nodes= each.value["num_cache_nodes"]
   node_type= each.value["node_type"]
+  allow_subnets= lookup(local.subnet_cidr,each.value["allow_subnets"],null)
 
 }
 
