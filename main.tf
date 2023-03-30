@@ -41,6 +41,7 @@ module "rds"{
 
   # subnet id is cmoing from vpc module private subnets to here as input
   subnet_ids= local.db_subnet_ids
+  vpc_id= module.vpc["main"].vpc_id
 
   for_each = var.rds
   engine= each.value["engine"]
@@ -49,6 +50,7 @@ module "rds"{
   preferred_backup_window= each.value["preferred_backup_window"]
   no_of_instances= each.value["no_of_instances"]
   instance_class= each.value["instance_class"]
+  allow_subnets= lookup(local.subnet_cidr,each.value["allow_subnets"],null)
 }
 
 
@@ -74,12 +76,16 @@ module "rabbitmq"{
   source = "git::https://github.com/ravi568/tf-module-rabbitmq.git"
   env = var.env
   tags = var.tags
+  bastion_cidr= var.bastion_cidr
+  dns_domain= var.dns_domain
 
   # subnet id is cmoing from vpc module private subnets to here as input
   subnet_ids= local.db_subnet_ids
+  vpc_id= module.vpc["main"].vpc_id
 
   for_each = var.rabbitmq
   instance_type= each.value["instance_type"]
+  allow_subnets= lookup(local.subnet_cidr,each.value["allow_subnets"],null)
 
 }
 
