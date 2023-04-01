@@ -111,6 +111,7 @@ module "app"{
   env = var.env
   tags = var.tags
   bastion_cidr= var.bastion_cidr
+  monitoring_nodes= var.monitoring_nodes
   dns_domain= var.dns_domain
 
   vpc_id= module.vpc["main"].vpc_id
@@ -137,4 +138,31 @@ module "app"{
 
 output "alb" {
   value = module.alb
+}
+
+## load-runner
+
+data "aws_ami" "ami" {
+  most_recent = true
+  name_regex  = "devops-practice-with-ansible"
+  owners      = ["self"]
+}
+
+
+resource "aws_spot_instance_request" "load-runner" {
+  ami           = data.aws_ami.ami.id
+  instance_type = "t3.medium"
+  wait_for_fulfillment = true
+  vpc_security_group_ids = ["allow-all"]
+
+  tags = merge(
+    var.tags,
+    {Name = "load-runner"}
+  )
+}
+
+resource "aws_ec2_tag" "name-tag" {
+  key         = "Name"
+  resource_id = aws_spot_instance_request.load-runner.spot_instance_id
+  value       = "loadrunner"
 }

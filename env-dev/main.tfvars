@@ -1,5 +1,6 @@
 env = "dev"
 bastion_cidr= ["172.31.8.100/32"]
+monitoring_nodes=["172.31.14.90/32"]
 dns_domain= "kalluriravidevops71.online"
 
 vpc = {
