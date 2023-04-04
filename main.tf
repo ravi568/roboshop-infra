@@ -146,7 +146,7 @@ resource "aws_spot_instance_request" "load-runner" {
   ami           = data.aws_ami.ami.id
   instance_type = "t3.medium"
   wait_for_fulfillment = true
-  vpc_security_group_ids = ["allow-all"]
+  vpc_security_group_ids = ["sg-0e9e4460e83575a63"]
 
   tags = merge(
     var.tags,
@@ -161,6 +161,9 @@ resource "aws_ec2_tag" "name-tag" {
 }
 
 resource "null_resource" "load-gen" {
+  triggers = {
+    abc= aws_spot_instance_request.load-runner.public_ip
+  }
   provisioner "remote-exec" {
     connection {
       host = aws_spot_instance_request.load-runner.public_ip
