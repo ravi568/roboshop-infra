@@ -12,7 +12,6 @@ module "vpc" {
 
 }
 
-/*
 
 module "docdb" {
   source = "git::https://github.com/ravi568/tf-module-docdb.git"
@@ -89,7 +88,7 @@ module "rabbitmq"{
   allow_subnets= lookup(local.subnet_cidr,each.value["allow_subnets"],null)
 
 }
-*/
+
 
 module "alb"{
   source = "git::https://github.com/ravi568/tf-module-alb.git"
@@ -107,7 +106,7 @@ module "alb"{
 
 module "app"{
 
-  //depends_on = [module.docdb, module.rds, module.elasticache, module.alb, module.rabbitmq]
+  depends_on = [module.vpc,module.docdb, module.rds, module.elasticache, module.alb, module.rabbitmq]
 
   source = "git::https://github.com/ravi568/tf-module-app.git"
   env = var.env
