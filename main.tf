@@ -160,7 +160,7 @@ resource "aws_spot_instance_request" "load-runner" {
 resource "aws_ec2_tag" "name-tag" {
   key         = "Name"
   resource_id = aws_spot_instance_request.load-runner.spot_instance_id
-  value       = "loadrunner"
+  value       = "load-runner"
 }
 
 resource "null_resource" "load-gen" {
@@ -177,7 +177,7 @@ resource "null_resource" "load-gen" {
       "curl -s -L https://get.docker.com | bash",
       "systemctl enable docker",
       "systemctl start docker",
-      "docker pull roboshop/rs-load"
+      "docker pull robotshop/rs-load"
     ]
   }
 }
