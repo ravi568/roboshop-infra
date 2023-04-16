@@ -73,6 +73,7 @@ module "elasticache"{
 }
 
 module "rabbitmq"{
+  depends_on = [module.vpc]
   source = "git::https://github.com/ravi568/tf-module-rabbitmq.git"
   env = var.env
   tags = var.tags
@@ -141,7 +142,7 @@ output "alb" {
   value = module.alb
 }
 
-/*
+
 ## load-runner
 
 resource "aws_spot_instance_request" "load-runner" {
@@ -180,4 +181,3 @@ resource "null_resource" "load-gen" {
     ]
   }
 }
-*/
