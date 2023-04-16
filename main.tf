@@ -177,7 +177,7 @@ resource "null_resource" "load-gen" {
       "curl -s -L https://get.docker.com | bash",
       "systemctl enable docker",
       "systemctl start docker",
-      "docker pull robotshop/rs-load"
+      "docker pull roboshop/rs-load"
     ]
   }
 }
