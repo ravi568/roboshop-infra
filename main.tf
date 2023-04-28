@@ -12,7 +12,7 @@ module "vpc" {
 
 }
 
-/*
+
 module "docdb" {
   source = "git::https://github.com/ravi568/tf-module-docdb.git"
   env = var.env
@@ -90,7 +90,7 @@ module "rabbitmq"{
 
 }
 
-
+/*
 module "alb"{
   source = "git::https://github.com/ravi568/tf-module-alb.git"
   env = var.env
