@@ -141,7 +141,7 @@ module "app"{
 output "alb" {
   value = module.alb
 }
-
+*/
 
 ## load-runner
 
@@ -183,7 +183,7 @@ resource "null_resource" "load-gen" {
 }
 
 
-
+/*
 module "minikube" {
   source = "github.com/scholzj/terraform-aws-minikube"
 
